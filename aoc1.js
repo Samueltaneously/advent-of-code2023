@@ -1018,8 +1018,27 @@ const cleanedData = dataFormator(rawData);
 
 let sum = 0;
 
+function replaceWordsWithNumbers(string) {
+    const wordToNumber = {
+        one: 1,
+        two: 2,
+        three: 3,
+        four: 4,
+        five: 5,
+        six: 6,
+        seven: 7,
+        eight: 8,
+        nine: 9
+    };
+
+    const replacedString = string.replace(/(?:one|two|three|four|five|six|seven|eight|nine)/g, match => wordToNumber[match]);
+    return replacedString;
+}
+
 function numberFinder(string) {
-    const numbersInString = string.match(/\d/g);
+    // const numbersInString = string.match(/\d/g);
+    const stringWithNumbers = replaceWordsWithNumbers(string);
+    const numbersInString = stringWithNumbers.match(/\d/g);
     console.log("numbersInString", numbersInString);
 
     // No digits in string
