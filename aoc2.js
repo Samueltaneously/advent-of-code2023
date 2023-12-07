@@ -106,17 +106,18 @@ Game 100: 8 green, 7 blue, 1 red; 10 blue, 2 green, 5 red; 12 blue, 1 green, 1 r
 
 const dataFormator = (data) => {
 
-    const formattedData = {};
+    const formattedData = [];
 
     const games = data.trim().split('\n');
 
     games.forEach(game => {
         const parts = game.split(':');
-        const gameName = parts[0].trim();
+        // const gameName = parts[0].trim();
         const pullData = parts[1].trim().split(';');
 
         const formattedPullData = pullData.map(move => move.trim().split(', '));
-        formattedData[gameName] = formattedPullData;
+        formattedData.push(formattedPullData)
+        // formattedData[gameName] = formattedPullData;
     });
 
     return formattedData;
@@ -124,7 +125,7 @@ const dataFormator = (data) => {
 }
 
 const cleanedData = dataFormator(rawData);
-// console.log(cleanedData);
+console.log(cleanedData);
 // F O R M A T T I N G    O F    D A T A //
 
 
@@ -158,9 +159,74 @@ const cleanedData = dataFormator(rawData);
 // loop through each game's pull data
 // check if any pull data was greater than 12 for red, 13 for green, and 14 for blue
 
+const colorsMaxs = {
+    'red': 12,
+    'green': 13,
+    'blue': 14,
+};
+
+
+const blockMax = (eachPulledData) => {
+    // console.log('each pulled data', eachPulledData);
+    for (let eachColor of eachPulledData) {
+        // console.log("each color", eachColor);
+        if (eachColor.includes('red')) {
+            console.log("is red check");
+            console.log('colormax value is:', colorsMaxs['red'], 'eachcolorsplit is', eachColor.split(' ')[0]);
+            if ((Number(eachColor.split(' ')[0])) > (Number(colorsMaxs['red']))) {
+                console.log(eachColor.split(' ')[0]);
+                return 0;
+            }
+            else if (Number(eachColor.split(' ')[0]) <= colorsMaxs['red']) {
+                return eachColor[0];
+            }
+        }
+
+        if (eachColor.includes('green')) {
+            console.log('colormax value is:', colorsMaxs['green'], 'eachcolorsplit is', eachColor.split(' '));
+
+            if ((Number(eachColor.split(' ')[0])) > (Number(colorsMaxs['green']))) {
+                return 0;
+            }
+            else if (Number(eachColor.split(' ')[0]) <= colorsMaxs['green']) {
+                return eachColor[0];
+            }
+        }
+
+        if (eachColor.includes('blue')) {
+            console.log('colormax value is:', colorsMaxs['blue'], 'eachcolorsplit is', eachColor.split(' '));
+
+            if ((Number(eachColor.split(' ')[0])) > (Number(colorsMaxs['blue']))) {
+                return 0;
+            }
+            else if (Number(eachColor.split(' ')[0]) <= colorsMaxs['blue']) {
+                return eachColor[0];
+            }
+        }
+
+    }
+
+};
+
+
 const solve = (data) => {
 
-    data.forEach(gameInstance => {
-        if 
-    })
-}
+    let sum = 0;
+    let gameID = 1;
+    for (let gameInstance of data) {
+        // console.log("game instance", gameInstance);
+        for (let eachPulledData of gameInstance) {
+            console.log('blockmax of data:', blockMax(eachPulledData));
+            if (blockMax(eachPulledData) != 0) {
+                sum += gameID;
+                console.log("gameid being added to sum:", gameID);
+            };
+            gameID++;
+        }
+    }
+    console.log("solve =", sum);
+    // console.log('red colorMax', colorsMaxs['red']);
+    return sum;
+};
+
+solve(cleanedData);
