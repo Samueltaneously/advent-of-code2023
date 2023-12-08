@@ -162,61 +162,64 @@ console.log(cleanedData);
 const colorsMaxs = {
     'red': 12,
     'green': 13,
-    'blue': 14,
+    'blue': 14
 };
 
 
 const blockMax = (eachPulledData) => {
     // console.log('each pulled data', eachPulledData);
+    let isMaxedOut = 0;
+
     for (let eachColor of eachPulledData) {
         // console.log("each color", eachColor);
 
-        let isMaxedOut = 0;
 
         if (eachColor.includes('red')) {
-            // console.log("is red check");
-            // console.log('colormax value is:', colorsMaxs['red'], 'eachcolorsplit is', eachColor.split(' ')[0]);
+            console.log("is red check");
+            console.log('colormax value is:', colorsMaxs['red'], 'eachcolorsplit is', eachColor.split(' ')[0]);
             if ((Number(eachColor.split(' ')[0])) > (Number(colorsMaxs['red']))) {
                 // console.log(eachColor.split(' ')[0]);
-                isMaxedOut++;
+                isMaxedOut += 1;
             }
-            else if (Number(eachColor.split(' ')[0]) <= colorsMaxs['red']) {
+            else if ((Number(eachColor.split(' ')[0])) <= colorsMaxs['red']) {
                 isMaxedOut += 0;
             }
         }
 
         if (eachColor.includes('green')) {
-            console.log('colormax value is:', colorsMaxs['green'], 'eachcolorsplit is', eachColor.split(' '));
+            // console.log('colormax value is:', colorsMaxs['green'], 'eachcolorsplit is', eachColor.split(' '));
 
             if ((Number(eachColor.split(' ')[0])) > (Number(colorsMaxs['green']))) {
-                isMaxedOut++;
+                isMaxedOut += 1;
             }
-            else if (Number(eachColor.split(' ')[0]) <= colorsMaxs['green']) {
+            else if ((Number(eachColor.split(' ')[0])) <= colorsMaxs['green']) {
                 isMaxedOut += 0;
             }
         }
 
         if (eachColor.includes('blue')) {
-            console.log('colormax value is:', colorsMaxs['blue'], 'eachcolorsplit is', eachColor.split(' '));
+            // console.log('colormax value is:', colorsMaxs['blue'], 'eachcolorsplit is', eachColor.split(' '));
 
             if ((Number(eachColor.split(' ')[0])) > (Number(colorsMaxs['blue']))) {
-                isMaxedOut++;
+                isMaxedOut += 1;
             }
-            else if (Number(eachColor.split(' ')[0]) <= colorsMaxs['blue']) {
+            else if ((Number(eachColor.split(' ')[0])) <= colorsMaxs['blue']) {
                 isMaxedOut += 0;
             }
         }
 
-        if (isMaxedOut < 1) {
-            return 0;
-        }
-
-        else if (isMaxedOut > 1) {
-            return 1;
-        }
 
     }
 
+    if (isMaxedOut < 1) {
+        return 0;
+    }
+
+    else if (isMaxedOut > 1) {
+        return 1;
+    }
+
+    // return isMaxedOut;
 
 };
 
@@ -232,19 +235,23 @@ const solve = (data) => {
         for (let eachPulledData of gameInstance) {
 
 
-            console.log('blockmax of data:', blockMax(eachPulledData));
-            if (blockMax(eachPulledData) != 0) {
-                console.log("gameid being added to sum:", gameID);
+            if (blockMax(eachPulledData) !== 0) {
+                console.log('blockmax of data:', blockMax(eachPulledData));
+                gameComplies = false;
                 break;
             }
 
-            else if (blockMax(eachPulledData) == 0) {
+            else if (blockMax(eachPulledData) === 0) {
+                console.log('blockmax of data:', blockMax(eachPulledData));
                 gameComplies = true;
             }
 
         }
 
-        if (gameComplies == true) {
+        if (gameComplies === true) {
+            console.log("gameid being added to sum:", gameID);
+            console.log("sum:", sum);
+
             sum += gameID;
         }
 
