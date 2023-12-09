@@ -173,6 +173,42 @@ console.log(cleanedData);
 // if symbol add number to count
 
 
+const numCheck = (value) => {
+
+    let valueContainsString = false;
+
+    let aNumber = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+
+    if (value.some(string => aNumber.includes(string))) {
+
+        valueContainsString = true;
+
+    }
+
+    return valueContainsString;
+
+}
+
+const solve = (data) => {
+
+    for (let eachLine of data) {
+
+        for (let i = 0; i < eachLine.length; i++) {
+
+
+
+            if (numCheck(i)) {
+
+
+                // store i value
+
+            }
+
+        }
+
+    }
+
+}
 
 
 //// P A R T    T W O ////
