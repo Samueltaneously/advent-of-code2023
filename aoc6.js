@@ -14,7 +14,7 @@ let recordDistances = [302, 1476, 1029, 1404];
 
 
 
-
+//// P A R T    O N E ////
 const possibleHoldTimes = (iteration, raceTimes, recordDistances) => {
 
     let holdTimesThatCompleteRace = [];
@@ -57,10 +57,14 @@ const solve = (raceTimes, recordDistances) => {
 
 }
 
-
-
 solve(raceTimes, recordDistances);
 
 
 
-// recordDistances / holdTime
+//// P A R T    T W O ////
+
+let raceTime = [54946592];
+
+let recordDistance = [302147610291404];
+
+console.log('part 2:', possibleHoldTimes(0, raceTime, recordDistance));
