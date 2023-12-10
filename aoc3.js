@@ -153,7 +153,7 @@ const dataFormator = (data) => {
 }
 
 const cleanedData = dataFormator(rawData);
-console.log(cleanedData);
+// console.log(cleanedData);
 
 // F O R M A T T I N G    O F    D A T A //
 
@@ -173,7 +173,7 @@ console.log(cleanedData);
 // if symbol add number to count
 
 
-const numCheck = (value) => {
+const isNumPresentInSpace = (value) => {
 
     let valueContainsString = false;
 
@@ -185,28 +185,39 @@ const numCheck = (value) => {
 
     }
 
+    else {
+
+        valueContainsString = false;
+    }
+
     return valueContainsString;
 
 }
 
 const solve = (data) => {
+    let wordLocations = [];
 
     for (let eachLine of data) {
 
         for (let i = 0; i < eachLine.length; i++) {
 
 
+            while (isNumPresentInSpace(`${eachLine[i]}`) == true) {
 
-            if (numCheck(i)) {
+                let word = [];
 
+                word.push(i)
 
-                // store i value
+                console.log('word', word);
+
+                wordLocations.push(word);
 
             }
-
         }
 
+        console.log('wordLocations of each line', wordLocations);
     }
+    console.log('word locations:', wordLocations);
 
 }
 
