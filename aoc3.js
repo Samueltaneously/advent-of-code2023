@@ -179,7 +179,7 @@ const isNumPresentInSpace = (value) => {
 
     let aNumber = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-    if (value.some(string => aNumber.includes(string))) {
+    if (aNumber.includes(value)) {
 
         valueContainsString = true;
 
@@ -195,31 +195,36 @@ const isNumPresentInSpace = (value) => {
 }
 
 const solve = (data) => {
-    let wordLocations = [];
+    let numLocations = [];
 
     for (let eachLine of data) {
+        let numLineLocation = [];
 
         for (let i = 0; i < eachLine.length; i++) {
 
+            // console.log('eachlines val', eachLine[i]);
 
-            while (isNumPresentInSpace(`${eachLine[i]}`) == true) {
 
-                let word = [];
+            if (isNumPresentInSpace(`${eachLine[i]}`) === true) {
 
-                word.push(i)
-
-                console.log('word', word);
-
-                wordLocations.push(word);
+                numLineLocation.push(i);
+                // console.log('num', num);
 
             }
+
+
+        }
+        if (numLineLocation != []) {
+            numLocations.push(numLineLocation);
         }
 
-        console.log('wordLocations of each line', wordLocations);
+        console.log('numLocations of each line', numLocations);
     }
-    console.log('word locations:', wordLocations);
+    // console.log('num locations:', numLocations);
 
 }
+
+solve(cleanedData);
 
 
 //// P A R T    T W O ////
