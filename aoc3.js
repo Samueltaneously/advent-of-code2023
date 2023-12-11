@@ -151,7 +151,18 @@ const dataFormator = (data) => {
     return formattedData;
 
 }
+/*
 
+for (let i = 0; i < formattedData.length; i++){
+    // Adds '.' to start and end of each line
+    formattedData[i] = '.'+formattedData[i]+'.';
+}
+// adds lines of '.' to start and end of formattedData
+padding = '.';
+padding.repeat(formattedData[0].length);
+formattedData.push(padding);
+formattedData.unshift(padding);
+*/
 const cleanedData = dataFormator(rawData);
 // console.log(cleanedData);
 
@@ -199,6 +210,8 @@ const solve = (data) => {
 
     for (let eachLine of data) {
         let numLineLocation = [];
+        let partNums = [];
+        let nums = '';
 
         for (let i = 0; i < eachLine.length; i++) {
 
@@ -208,17 +221,36 @@ const solve = (data) => {
             if (isNumPresentInSpace(`${eachLine[i]}`) === true) {
 
                 numLineLocation.push(i);
+                nums += eachLine[i];
+                //numValue += eachLine[i];
                 // console.log('num', num);
 
+            } else {
+                //make objects and push to partnums
+                partNums.push({ numLineLocation, nums })
+                nums = '';
             }
 
 
         }
         if (numLineLocation != []) {
+            /*
+            numLineLocations formatted like [[1,2,3],[6,7]]
+            numLocations : [numLineLocations1, numLine....]
+
+            could change numLineLocations to something like
+                [{[1,2,3],432}, {[8,9],69}] 
+
+            return numLocations
+            */
+            //numLocations.push(Number(numLineLocation));
+            // format like [number indices, number]
             numLocations.push(numLineLocation);
         }
 
-        console.log('numLocations of each line', numLocations);
+        console.log('part nums:', partNums);
+
+        // console.log('numLocations of each line', numLocations);
     }
     // console.log('num locations:', numLocations);
 
